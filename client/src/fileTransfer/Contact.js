@@ -1,24 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
 import io from 'socket.io-client';
 import Peer from 'simple-peer';
-import styled from 'styled-components';
 import streamSaver from 'streamsaver';
 
-const Container = styled.div`
-    padding: '20px';
-    display: 'flex';
-    height: '100vh';
-    width: '90%';
-    margin: 'auto';
-    flex-wrap: 'wrap';
-`;
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 const worker = new Worker('../worker.js');
 
-const Room = ({ match }) => {
+const Contact = ({ match }) => {
     const [connectionEstablished, setConnection] = useState(false);
     const [file, setFile] = useState();
     const [gotFile, setGotFile] = useState(false);
+    let body;
+    let downloadPrompt;
 
     // const chunksRef = useRef([]);
     const socketRef = useRef();
@@ -28,7 +23,7 @@ const Room = ({ match }) => {
 
     useEffect(() => {
         socketRef.current = io.connect('/');
-        socketRef.current.emit('join room', match.params.roomID);
+        socketRef.current.emit('join room', match.params.id);
         socketRef.current.on('all users', (users) => {
             peerRef.current = createPeer(users[0], socketRef.current.id);
         });
@@ -134,41 +129,49 @@ const Room = ({ match }) => {
         }
     }
 
-    let body;
     if (connectionEstablished) {
         body = (
-            <div>
+            <div className="add-file">
                 <input onChange={selectFile} type="file" />
                 <button onClick={sendFile}>Send file</button>
             </div>
         );
     } else {
         body = (
-            <h1>
-                Once you have a peer connection, you will be able to share files
-            </h1>
+            <div className="expectation">
+                <h1>Wait for connection!</h1>
+                <h2>
+                    Once you have a peer connection, you will be able to share
+                    files
+                </h2>
+            </div>
         );
     }
 
-    let downloadPrompt;
     if (gotFile) {
         downloadPrompt = (
-            <div>
-                <span>
+            <div className="download-file">
+                <span className="info">
                     You have received a file. Would you like to download the
                     file?
                 </span>
-                <button onClick={download}>Yes</button>
+                <button onClick={download}>Download</button>
             </div>
         );
     }
 
     return (
-        <Container>
-            {body}
-            {downloadPrompt}
-        </Container>
+        <>
+            <Header />
+            <div className="container">
+                <div className="contact">
+                    {!gotFile && body}
+                    {downloadPrompt}
+                </div>
+            </div>
+            <Footer />
+        </>
     );
 };
 
-export default Room;
+export default Contact;

@@ -1,14 +1,14 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import CreateRoom from './fileTransfer/CreateRoom';
-import Room from './fileTransfer/Room';
+import CreateContact from './fileTransfer/CreateContact';
+import Contact from './fileTransfer/Contact';
 
 function App() {
     return (
         <BrowserRouter>
             <Switch>
-                <Route path="/" exact component={CreateRoom} />
-                <Route path="/room/:roomID" component={Room} />
+                <Route path="/" exact component={CreateContact} />
+                <Route path="/contact/:id" component={Contact} />
             </Switch>
         </BrowserRouter>
     );

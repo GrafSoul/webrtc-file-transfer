@@ -1,0 +1,83 @@
+.contact {
+    margin: 15px;
+    text-align: center;
+    padding: 30px 45px;
+    border: 1px solid $color-primary-light;
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+
+    .expectation {
+        margin: 10px 0 20px;
+
+        h1 {
+            color: $color-white;
+            font-size: 2.2em;
+        }
+
+        h2 {
+            color: $color-grey-light-1;
+            font-size: 1.2em;
+        }
+    }
+
+    .add-file {
+        input {
+            padding: 5px 20px 7px;
+            font-size: 1.5em;
+            font-weight: 500;
+            color: $color-white;
+            outline: none;
+        }
+
+        button {
+            padding: 5px 20px 7px;
+            font-size: 1.5em;
+            font-weight: 500;
+            color: $color-white;
+            outline: none;
+            background-color: rgb(20, 83, 126);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+            transition: 0.3s all ease;
+
+            &:hover {
+                background-color: rgb(26, 112, 170);
+                box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+            }
+        }
+    }
+
+    .download-file {
+        margin: 10px 0 10px;
+        padding: 0;
+        font-size: 1.5em;
+        font-weight: 500;
+        color: $color-white;
+
+        .info {
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 3px 20px 5px;
+            font-size: 1.2em;
+            font-weight: 500;
+            color: $color-white;
+            outline: none;
+            background-color: rgb(54, 148, 0);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+            transition: 0.3s all ease;
+
+            &:hover {
+                background-color: rgb(71, 194, 0);
+                box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+            }
+        }
+    }
+}

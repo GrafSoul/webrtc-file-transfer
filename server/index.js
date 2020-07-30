@@ -11,8 +11,6 @@ const port = process.env.PORT || 8000;
 const users = {};
 const socketToRoom = {};
 
-console.log(process.env.PROD);
-
 if (process.env.PROD) {
     app.use(express.static(path.join(__dirname, '../client/build')));
     app.get('*', (req, res) => {
