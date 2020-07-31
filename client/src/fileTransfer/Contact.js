@@ -8,10 +8,12 @@ import Footer from '../components/Footer';
 import ExitButton from '../components/ExitButton';
 import LinkButton from '../components/LinkButton';
 import LinkContact from '../components/LinkContact';
+import Loader from '../components/Loader';
 
 const worker = new Worker('../worker.js');
 
 const Contact = ({ history, match }) => {
+    const [spinner, setSpinner] = useState(false);
     const [connectionEstablished, setConnection] = useState(false);
     const [file, setFile] = useState();
     const [gotFile, setGotFile] = useState(false);
@@ -24,6 +26,10 @@ const Contact = ({ history, match }) => {
     const socketRef = useRef();
     const peerRef = useRef();
     const fileNameRef = useRef('');
+
+    useEffect(() => {
+        setTimeout(() => setSpinner(true), 1000);
+    });
 
     useEffect(() => {
         socketRef.current = io.connect('/');
@@ -207,6 +213,11 @@ const Contact = ({ history, match }) => {
                 </div>
             </div>
             <Footer />
+            {!spinner && (
+                <div className="loader">
+                    <Loader />
+                </div>
+            )}
         </>
     );
 };

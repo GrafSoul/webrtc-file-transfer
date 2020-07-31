@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { v1 as uuid } from 'uuid';
 
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import CopyLink from '../components/CopyLink';
 import QRCodeImage from '../components/QRCodeImage';
+import Loader from '../components/Loader';
 
 const CreateContact = ({ history }) => {
+    const [spinner, setSpinner] = useState(false);
     const id = uuid();
     const url = window.location.href + `contact/${id}`;
+
+    useEffect(() => {
+        setTimeout(() => setSpinner(true), 1000);
+    }, []);
 
     function createContact() {
         history.push(`/contact/${id}`);
@@ -50,6 +56,11 @@ const CreateContact = ({ history }) => {
                 </section>
             </div>
             <Footer />
+            {!spinner && (
+                <div className="loader">
+                    <Loader />
+                </div>
+            )}
         </>
     );
 };
