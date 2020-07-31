@@ -5,19 +5,23 @@ import streamSaver from 'streamsaver';
 
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import ExitButton from '../components/ExitButton';
+import LinkButton from '../components/LinkButton';
+import LinkContact from '../components/LinkContact';
 
 const worker = new Worker('../worker.js');
 
-const Contact = ({ match }) => {
+const Contact = ({ history, match }) => {
     const [connectionEstablished, setConnection] = useState(false);
     const [file, setFile] = useState();
     const [gotFile, setGotFile] = useState(false);
+
+    const [isCopied, setIsCopied] = useState(false);
+    const [shareLink, setShareLink] = useState(false);
     let body;
     let downloadPrompt;
 
-    // const chunksRef = useRef([]);
     const socketRef = useRef();
-    // const peersRef = useRef([]);
     const peerRef = useRef();
     const fileNameRef = useRef('');
 
@@ -129,6 +133,30 @@ const Contact = ({ match }) => {
         }
     }
 
+    function handleCopyLink(url) {
+        navigator.clipboard
+            .writeText(url)
+            .then(() => {
+                setIsCopied(true);
+                setTimeout(() => setIsCopied(false), 1000);
+            })
+            .catch((err) => {
+                console.log('Something went wrong', err);
+            });
+
+        setTimeout(() => {
+            handleShareLink();
+        }, 1800);
+    }
+
+    function handleShareLink() {
+        setShareLink(!shareLink);
+    }
+
+    const exitRoom = () => {
+        history.push('/');
+    };
+
     if (connectionEstablished) {
         body = (
             <div className="add-file">
@@ -163,6 +191,15 @@ const Contact = ({ match }) => {
     return (
         <>
             <Header />
+            <ExitButton exitRoom={exitRoom} />
+            <LinkButton handleShareLink={handleShareLink} />
+            <LinkContact
+                shareLink={shareLink}
+                handleShareLink={handleShareLink}
+                handleCopyLink={handleCopyLink}
+                copied={isCopied}
+                url={window.location.href}
+            />
             <div className="container">
                 <div className="contact">
                     {!gotFile && body}

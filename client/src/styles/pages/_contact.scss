@@ -81,3 +81,212 @@
         }
     }
 }
+
+.btn-exit-wrap {
+    position: absolute;
+    top: 55px;
+    left: 15px;
+    width: 50px;
+    height: 50px;
+    z-index: 110;
+
+    .btn-exit {
+        width: 50px;
+        height: 50px;
+        padding: 0;
+        margin: 0;
+        text-align: left;
+        display: inline-block;
+        border: none;
+        outline: none;
+        background-color: rgba(20, 39, 56, 0.5);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: .3s all ease;
+
+        &:hover {
+            opacity: 0.5;
+        }
+    }
+
+    .icon {
+        width: 50px;
+        height: 50px;
+        padding: 0;
+        margin: 0;
+        display: block;
+        background: url("/images/icons_send.png") no-repeat 0 0;
+
+        &.icon-exit {
+            background-position: 0 0;
+        }
+    }
+}
+
+.link-control {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0 75px 35px;
+
+    .btn {
+        width: 50px;
+        height: 50px;
+        padding: 0;
+        margin: 0;
+        text-align: left;
+        display: inline-block;
+        border: none;
+        outline: none;
+        background-color: rgba(20, 39, 56, 0.5);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: .3s all ease;
+
+        &:hover {
+            opacity: 0.5;
+        }
+    }
+
+    .icon {
+        width: 50px;
+        height: 50px;
+        padding: 0;
+        margin: 0;
+        display: block;
+        background: url("/images/icons_send.png") no-repeat 0 0;
+
+        &.icon-link {
+            background-position: -50px 0;
+        }
+    }
+
+    .btn-link {
+        position: absolute;
+        left: 15px;
+        bottom: 35px;
+    }
+
+}
+
+.link {
+    width: 300px;
+    padding: 50px 20px 20px;
+    position: absolute;
+    left: -310px;
+    top: 0;
+    bottom: 0;
+    border-right: 3px solid $color-primary-light;
+    background-color: $color-primary-dark;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, .5);
+    z-index: 110;
+    overflow-y: auto;
+    transition: .3s all ease;
+
+    &.active {
+        left: 0;
+    }
+
+    h2 {
+        margin-bottom: 20px;
+        color: $color-white;
+        font-size: 1.4em;
+    }
+
+    .btn-close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 50px;
+        height: 50px;
+        padding: 0;
+        margin: 0;
+        text-align: left;
+        display: inline-block;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        cursor: pointer;
+        transition: .3s all ease;
+
+        &:hover {
+            opacity: 0.5;
+        }
+
+        .icon-close {
+            width: 50px;
+            height: 50px;
+            padding: 0;
+            margin: 0;
+            display: block;
+            background: url("/images/icons_send.png") no-repeat -100px 0;
+        }
+    }
+
+    .link-info {
+        margin-bottom: 20px;
+        color: $color-white;
+        font-size: 1.2em;
+        line-height: 1.4em;
+    }
+
+    .link-url {
+        margin-bottom: 20px;
+
+        input {
+            padding: 7px 10px;
+            font-size: 1.2em;
+            color: $color-grey-light-2;
+            background-color: $color-primary;
+            border: 1px solid $color-primary-light;
+            border-radius: 10px;
+            width: 255px;
+            outline: none;
+        }
+    }
+
+    .link-copy {
+        margin-bottom: 20px;
+        position: relative;
+
+        button {
+            width: 255px;
+            padding: 5px 20px 7px;
+            font-size: 1.4em;
+            font-weight: 500;
+            color: $color-white;
+            background-color: rgb(54, 148, 0);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            outline: none;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+            transition: .3s all ease;
+
+            &:hover {
+                background-color: rgb(71, 194, 0);
+                box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+            }
+        }
+    }
+
+    .copied {
+        display: inline-block;
+        position: absolute;
+        padding: 2px 5px;
+        top: 7px;
+        left: 5px;
+        background-color: $color-primary;
+        border: 2px solid $color-primary-light;
+        box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+        transition: .3s all ease;
+        color: $color-grey-light-1;
+        border-radius: 6px;
+
+    }
+
+    .link-qrcode {
+        text-align: center;
+    }
+}
