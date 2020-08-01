@@ -55,6 +55,18 @@ const Contact = ({ history, match }) => {
             const peer = new Peer({
                 initiator: true,
                 trickle: false,
+                config: {
+                    iceServers: [
+                        {
+                            urls: 'stun:stun.stunprotocol.org',
+                        },
+                        {
+                            urls: 'turn:numb.viagenie.ca',
+                            credential: 'vidokchat',
+                            username: 'networkroom@live.com',
+                        },
+                    ],
+                },
             });
 
             peer.on('signal', (signal) => {
@@ -106,9 +118,7 @@ const Contact = ({ history, match }) => {
         worker.postMessage('download');
         worker.addEventListener('message', (event) => {
             const stream = event.data.stream();
-            const fileStream = streamSaver.createWriteStream(
-                fileNameRef.current,
-            );
+            const fileStream = streamSaver.WritableStream(fileNameRef.current);
             stream.pipeTo(fileStream);
         });
     }
