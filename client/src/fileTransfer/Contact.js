@@ -1,8 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import {
-    ReadableStream,
-    WritableStream,
-} from 'web-streams-polyfill/ponyfill/es6';
+import { ReadableStream } from 'web-streams-polyfill/ponyfill/es6';
 
 import io from 'socket.io-client';
 import Peer from 'simple-peer';
@@ -17,7 +14,6 @@ import Loader from '../components/Loader';
 
 const worker = new Worker('../worker.js');
 streamSaver.ReadableStream = new ReadableStream();
-streamSaver.WritableStream = new WritableStream();
 
 const Contact = ({ history, match }) => {
     const [spinner, setSpinner] = useState(false);
@@ -127,11 +123,6 @@ const Contact = ({ history, match }) => {
             const stream = event.data.stream();
             const fileStream = streamSaver.createWriteStream(
                 fileNameRef.current,
-                {
-                    size: 22, // (optional) Will show progress
-                    writableStrategy: undefined, // (optional)
-                    readableStrategy: undefined, // (optional)
-                },
             );
             stream.pipeTo(fileStream);
         });
