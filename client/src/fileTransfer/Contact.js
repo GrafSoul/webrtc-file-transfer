@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { ReadableStream } from 'web-streams-polyfill/ponyfill/es6';
+
 import io from 'socket.io-client';
 import Peer from 'simple-peer';
 import streamSaver from 'streamsaver';
@@ -11,6 +13,7 @@ import LinkContact from '../components/LinkContact';
 import Loader from '../components/Loader';
 
 const worker = new Worker('../worker.js');
+streamSaver.ReadableStream = new ReadableStream();
 
 const Contact = ({ history, match }) => {
     const [spinner, setSpinner] = useState(false);
@@ -118,7 +121,14 @@ const Contact = ({ history, match }) => {
         worker.postMessage('download');
         worker.addEventListener('message', (event) => {
             const stream = event.data.stream();
-            const fileStream = streamSaver.WritableStream(fileNameRef.current);
+            const fileStream = streamSaver.createWriteStream(
+                fileNameRef.current,
+                {
+                    size: 22, // (optional) Will show progress
+                    writableStrategy: undefined, // (optional)
+                    readableStrategy: undefined, // (optional)
+                },
+            );
             stream.pipeTo(fileStream);
         });
     }
