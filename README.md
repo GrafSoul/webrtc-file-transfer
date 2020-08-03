@@ -1,6 +1,6 @@
 # File Sender (WebRTC)
 
-#### The project is under construction! Do not use!
+#### The project only works stably on Google Chrome!
 
 A simple example of using WebRTC technology to create a file transfer channel.
 
